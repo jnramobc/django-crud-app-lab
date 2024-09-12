@@ -1,7 +1,12 @@
-<h1>Delete Bird</h1>
-<p>Are you sure you want to delete "{{ bird.name }}"?</p>
+{% extends 'base.html' %}
+
+{% block title %}Delete Bird{% endblock %}
+
+{% block content %}
+<h1>Are you sure you want to delete {{ object.name }}?</h1>
 <form method="post">
     {% csrf_token %}
-    <button type="submit">Confirm Delete</button>
+    <button type="submit">Yes, delete</button>
 </form>
 <a href="{% url 'bird_list' %}">Cancel</a>
+{% endblock %}

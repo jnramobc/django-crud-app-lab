@@ -29,15 +29,14 @@ class BirdCreate(LoginRequiredMixin, CreateView):
 class BirdUpdate(LoginRequiredMixin, UpdateView):
     model = Bird
     fields = ['name', 'species', 'description']
-    template_name = 'birdcollectorapp/bird_form.html'  # Correct path to your template
+    template_name = 'birdcollectorapp/bird_form.html'  
     success_url = reverse_lazy('bird_list')
-
 
 class BirdDelete(LoginRequiredMixin, DeleteView):
     model = Bird
-    template_name = 'birds/bird_confirm_delete.html'
-    success_url = reverse_lazy('bird-index')
-# Create your views here.
+    template_name = 'birdcollectorapp/bird_confirm_delete.html'  # Correct template path
+    success_url = reverse_lazy('bird_list')
+
 
 class SightingCreate(LoginRequiredMixin, CreateView):
     model = Sighting
