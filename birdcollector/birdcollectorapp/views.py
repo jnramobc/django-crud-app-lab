@@ -16,7 +16,7 @@ class SignUpView(CreateView):
     success_url = reverse_lazy('login')
 
 
-class BirdList(LoginRequiredMixin, ListView):
+class BirdList(ListView):
     model = Bird
     template_name = 'birdcollectorapp/templates/bird_list.html'  # You'll create this template
 

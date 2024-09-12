@@ -1,24 +1,38 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Bird Collector{% endblock %}</title>
+    {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% block head %} 
+    {% endblock %}
 </head>
 <body>
     <header>
-        <!-- Add your navbar or header content -->
+        <nav>
+            <ul>
+                <li><a href="{% url 'bird_list' %}">Home</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                {% endif %}
+            </ul>
+        </nav>
     </header>
 
     <main>
         {% block content %}
-        <!-- Your page content will go here -->
+        <!-- Page-specific content will go here -->
         {% endblock %}
     </main>
 
     <footer>
-        <!-- Footer content -->
+        <p>&copy; 2024 Bird Collector App</p>
     </footer>
 </body>
 </html>

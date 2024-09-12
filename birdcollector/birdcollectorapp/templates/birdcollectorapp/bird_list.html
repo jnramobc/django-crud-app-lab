@@ -4,16 +4,37 @@
 
 {% block content %}
 <h1>Bird List</h1>
+
+<!-- Authentication Links -->
+{% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }}! <a href="{% url 'logout' %}">Log out</a></p>
+{% else %}
+    <a href="{% url 'login' %}">Log in</a> | 
+    <a href="{% url 'signup' %}">Sign up</a> <!-- Add Sign Up link here -->
+{% endif %}
+
 <ul>
     {% for bird in object_list %}
     <li>
-        {{ bird.name }} - {{ bird.species }}: {{ bird.description }}
-        <!-- Edit Link -->
-        <a href="{% url 'bird-update' bird.pk %}">Edit</a> | 
-        <!-- Delete Link -->
-        <a href="{% url 'bird-delete' bird.pk %}">Delete</a>
+        <!-- Bird Detail Link -->
+        <a href="{% url 'bird-detail' bird.pk %}">{{ bird.name }}</a> 
+        - {{ bird.species }}: {{ bird.description }}
+
+        {% if user.is_authenticated %}
+            <!-- Edit and Delete Links (only visible to authenticated users) -->
+            <a href="{% url 'bird-update' bird.pk %}">Edit</a> | 
+            <a href="{% url 'bird-delete' bird.pk %}">Delete</a> |
+        {% endif %}
+
+        <!-- View Sightings Link -->
+        <a href="{% url 'bird-detail' bird.pk %}#sightings">View Sightings</a>
     </li>
     {% endfor %}
 </ul>
-<a href="{% url 'bird-create' %}">Add New Bird</a>
+
+<!-- Add Bird Link (only visible to authenticated users) -->
+{% if user.is_authenticated %}
+    <a href="{% url 'bird-create' %}">Add New Bird</a>
+{% endif %}
+
 {% endblock %}

@@ -3,6 +3,27 @@
 <h1>{{ bird.name }}</h1>
 <p>Species: {{ bird.species }}</p>
 <p>Description: {{ bird.description }}</p>
-<a href="{% url 'bird_update' bird.pk %}">Edit</a>
-<a href="{% url 'bird_delete' bird.pk %}">Delete</a>
+
+<!-- Links to edit or delete the bird -->
+<a href="{% url 'bird-update' bird.pk %}">Edit</a>
+<a href="{% url 'bird-delete' bird.pk %}">Delete</a>
 <a href="{% url 'bird_list' %}">Back to list</a>
+
+<!-- Display associated sightings for the bird -->
+<h2>Sightings</h2>
+<ul>
+    {% for sighting in bird.sighting_set.all %}
+    <li>{{ sighting.date }} at {{ sighting.location }} 
+        <a href="{% url 'sighting-detail' sighting.pk %}">View</a> | 
+        <a href="{% url 'sighting-update' sighting.pk %}">Edit</a> | 
+        <a href="{% url 'sighting-delete' sighting.pk %}">Delete</a>
+    </li>
+    {% empty %}
+    <li>No sightings available for this bird.</li>
+    {% endfor %}
+</ul>
+
+<!-- Link to add a new sighting -->
+<a href="{% url 'add-sighting' bird.pk %}">Add New Sighting</a>
+
+{% endblock %}
