@@ -1,7 +1,12 @@
-from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Bird
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Bird, Feeding
+from .forms import FeedingForm
+from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404
+from .models import Bird, Sighting
+
 
 class BirdList(LoginRequiredMixin, ListView):
     model = Bird

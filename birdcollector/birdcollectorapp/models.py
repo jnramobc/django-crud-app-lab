@@ -1,18 +1,25 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 # Bird model
 class Bird(models.Model):
     name = models.CharField(max_length=100)
     species = models.CharField(max_length=100)
     description = models.TextField()
-    age = models.IntegerField()
 
     def __str__(self):
         return self.name
 
-    def get_absolute_url(self):
-        return reverse('bird-detail', kwargs={'pk': self.pk})
+    
+# Define the Sighting model, referencing the Bird model
+class Sighting(models.Model):
+    bird = models.ForeignKey('Bird', on_delete=models.CASCADE)  # Use a string reference to avoid issues
+    location = models.CharField(max_length=100)
+    date = models.DateField()
+
+    def __str__(self):
+        return f'{self.bird.name} sighted at {self.location} on {self.date}'
 
 # Feeding model (one-to-many relation: Bird to Feedings)
 class Feeding(models.Model):
