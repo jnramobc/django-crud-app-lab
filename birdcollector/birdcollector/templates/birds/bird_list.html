@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Birds List</h2>
+  <ul>
+    {% for bird in object_list %}
+      <li><a href="{% url 'bird-detail' bird.id %}">{{ bird.name }}</a></li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'bird-create' %}">Add New Bird</a>
+{% endblock %}

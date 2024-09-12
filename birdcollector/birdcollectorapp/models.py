@@ -30,3 +30,11 @@ class Feeding(models.Model):
 
     class Meta:
         ordering = ['-date']
+
+class Sighting(models.Model):
+    date = models.DateField()
+    location = models.CharField(max_length=255)
+    bird = models.ForeignKey(Bird, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Sighting of {self.bird.name} on {self.date}"

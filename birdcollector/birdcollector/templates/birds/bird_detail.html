@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>{{ object.name }}</h2>
+  <p>Species: {{ object.species }}</p>
+  <p>Age: {{ object.age }}</p>
+  <p>Description: {{ object.description }}</p>
+  <a href="{% url 'bird-update' object.id %}">Edit</a> |
+  <a href="{% url 'bird-delete' object.id %}">Delete</a>
+{% endblock %}
+
+<h3>Sightings</h3>
+<ul>
+  {% for sighting in object.sighting_set.all %}
+    <li>{{ sighting.date }} at {{ sighting.location }}</li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'add-sighting' object.id %}">Add Sighting</a>
