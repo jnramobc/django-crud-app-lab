@@ -22,7 +22,8 @@ class BirdList(ListView):
 
 class BirdDetail(LoginRequiredMixin, DetailView):
     model = Bird
-    template_name = 'birds/bird_detail.html'
+    template_name = 'birds/bird_detail.html'  # Make sure this path matches the template location
+
 
 class BirdCreate(LoginRequiredMixin, CreateView):
     model = Bird

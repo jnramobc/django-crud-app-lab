@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Bird Detail{% endblock %}
+
+{% block content %}
+<h1>{{ bird.name }}</h1>
+<p>Species: {{ bird.species }}</p>
+<p>Description: {{ bird.description }}</p>
+
+<!-- Navigation links -->
+<a href="{% url 'bird-update' bird.pk %}">Edit</a> | 
+<a href="{% url 'bird-delete' bird.pk %}">Delete</a> | 
+<a href="{% url 'bird_list' %}">Back to list</a>
+
+<!-- Optionally display Sightings related to this bird -->
+<h2>Sightings</h2>
+<ul>
+    {% for sighting in bird.sighting_set.all %}
+        <li>{{ sighting.date }} - {{ sighting.location }}</li>
+    {% empty %}
+        <li>No sightings yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
