@@ -6,6 +6,14 @@ from .forms import FeedingForm
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
 from .models import Bird, Sighting
+from django.views.generic import UpdateView, DeleteView
+from django.contrib.auth.forms import UserCreationForm
+from django.views import generic
+
+class SignUpView(CreateView):
+    form_class = UserCreationForm
+    template_name = 'registration/signup.html'
+    success_url = reverse_lazy('login')
 
 
 class BirdList(LoginRequiredMixin, ListView):
@@ -52,3 +60,28 @@ class SightingCreate(LoginRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context['bird'] = Bird.objects.get(pk=self.kwargs['pk'])  # Pass bird to template
         return context
+    
+    from django.views.generic import ListView, DetailView
+
+# List view to show all sightings
+class SightingList(LoginRequiredMixin, ListView):
+    model = Sighting
+    template_name = 'sightings/sighting_list.html'
+
+# Detail view for an individual sighting
+class SightingDetail(LoginRequiredMixin, DetailView):
+    model = Sighting
+    template_name = 'sightings/sighting_detail.html'
+
+# Update view for a sighting
+class SightingUpdate(LoginRequiredMixin, UpdateView):
+    model = Sighting
+    fields = ['date', 'location']
+    template_name = 'sightings/sighting_form.html'
+    success_url = reverse_lazy('sighting-list')
+
+# Delete view for a sighting
+class SightingDelete(LoginRequiredMixin, DeleteView):
+    model = Sighting
+    template_name = 'sightings/sighting_confirm_delete.html'
+    success_url = reverse_lazy('sighting-list')

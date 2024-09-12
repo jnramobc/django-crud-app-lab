@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Sighting Detail{% endblock %}
+
+{% block content %}
+<h1>Sighting Detail</h1>
+<p>Date: {{ object.date }}</p>
+<p>Location: {{ object.location }}</p>
+<p>Bird: {{ object.bird.name }}</p>
+<a href="{% url 'sighting-update' object.pk %}">Edit Sighting</a>
+<a href="{% url 'sighting-delete' object.pk %}">Delete Sighting</a>
+{% endblock %}

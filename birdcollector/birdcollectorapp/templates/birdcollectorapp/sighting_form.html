@@ -3,11 +3,11 @@
 {% block title %}Add New Sighting{% endblock %}
 
 {% block content %}
-<h1>Add New Sighting for {{ bird.name }}</h1>
+<h1>{% if object.pk %}Edit Sighting{% else %}Add New Sighting{% endif %}</h1>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Save</button>
 </form>
-<a href="{% url 'bird-detail' bird.id %}">Back to Bird Details</a>
+<a href="{% url 'sighting-list' %}">Back to list</a>
 {% endblock %}
