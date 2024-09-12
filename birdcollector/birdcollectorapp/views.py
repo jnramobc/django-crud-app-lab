@@ -18,9 +18,9 @@ class BirdDetail(LoginRequiredMixin, DetailView):
 
 class BirdCreate(LoginRequiredMixin, CreateView):
     model = Bird
-    fields = ['name', 'species', 'age', 'description']  # Add necessary fields
-    template_name = 'birds/bird_form.html'
-    success_url = reverse_lazy('bird-index')
+    fields = ['name', 'species', 'description']  # Add necessary fields
+    template_name = 'birdcollectorapp/bird_form.html'
+    success_url = reverse_lazy('bird_list')
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -28,7 +28,7 @@ class BirdCreate(LoginRequiredMixin, CreateView):
 
 class BirdUpdate(LoginRequiredMixin, UpdateView):
     model = Bird
-    fields = ['name', 'species', 'age', 'description']
+    fields = ['name', 'species', 'description']
     template_name = 'birds/bird_form.html'
     success_url = reverse_lazy('bird-index')
 

@@ -1,0 +1,7 @@
+<h1>Delete Bird</h1>
+<p>Are you sure you want to delete "{{ bird.name }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirm Delete</button>
+</form>
+<a href="{% url 'bird_list' %}">Cancel</a>

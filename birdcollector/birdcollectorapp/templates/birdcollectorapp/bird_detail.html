@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ bird.name }}</h1>
+<p>Species: {{ bird.species }}</p>
+<p>Description: {{ bird.description }}</p>
+<a href="{% url 'bird_update' bird.pk %}">Edit</a>
+<a href="{% url 'bird_delete' bird.pk %}">Delete</a>
+<a href="{% url 'bird_list' %}">Back to list</a>
