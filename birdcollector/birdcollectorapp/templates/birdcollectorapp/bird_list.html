@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Bird List{% endblock %}
+
+{% block content %}
+<h1>Bird List</h1>
+<ul>
+    {% for bird in birds %}
+    <li>{{ bird.name }} - {{ bird.species }}: {{ bird.description }}</li>
+    {% empty %}
+    <li>No birds found.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

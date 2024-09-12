@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Bird Collector{% endblock %}</title>
+    {% load static %} <!-- Add this line to load the static tag -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <!-- Navbar or other header content -->
+    </header>
+    <main>
+        {% block content %}
+        <!-- Page-specific content goes here -->
+        {% endblock %}
+    </main>
+    <footer>
+        <!-- Footer content -->
+    </footer>
+</body>
+</html>
+

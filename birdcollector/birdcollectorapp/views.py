@@ -10,7 +10,7 @@ from .models import Bird, Sighting
 
 class BirdList(LoginRequiredMixin, ListView):
     model = Bird
-    template_name = 'bird/bird_list.html'  # You'll create this template
+    template_name = 'birdcollectorapp/templates/bird_list.html'  # You'll create this template
 
 class BirdDetail(LoginRequiredMixin, DetailView):
     model = Bird
