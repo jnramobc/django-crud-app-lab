@@ -29,8 +29,9 @@ class BirdCreate(LoginRequiredMixin, CreateView):
 class BirdUpdate(LoginRequiredMixin, UpdateView):
     model = Bird
     fields = ['name', 'species', 'description']
-    template_name = 'birds/bird_form.html'
-    success_url = reverse_lazy('bird-index')
+    template_name = 'birdcollectorapp/bird_form.html'  # Correct path to your template
+    success_url = reverse_lazy('bird_list')
+
 
 class BirdDelete(LoginRequiredMixin, DeleteView):
     model = Bird
@@ -41,9 +42,14 @@ class BirdDelete(LoginRequiredMixin, DeleteView):
 class SightingCreate(LoginRequiredMixin, CreateView):
     model = Sighting
     fields = ['date', 'location']
-    template_name = 'sightings/sighting_form.html'
-    success_url = reverse_lazy('bird-index')
+    template_name = 'birdcollectorapp/sighting_form.html'
+    success_url = reverse_lazy('bird_list')
 
     def form_valid(self, form):
         form.instance.bird = Bird.objects.get(id=self.kwargs['pk'])  # Get the bird related to the sighting
         return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['bird'] = Bird.objects.get(pk=self.kwargs['pk'])  # Pass bird to template
+        return context
